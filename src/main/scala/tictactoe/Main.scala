@@ -6,6 +6,10 @@ object Main {
     var gameMode: Int = 0
 
     gameMode = chooseGameMode()
+
+    val board: Board = new Board()
+    val boardData: Array[Array[String]] = board.board
+    board.draw(boardData)
   }
 
   def chooseGameMode() : Int = {
@@ -24,10 +28,6 @@ object Main {
         println("You have selected an invalid game mode, try again!\n\n")
       }
     }
-
-    val board = new Board()
-    val boardData = board.build()
-    board.draw(boardData)
 
     println(s"\n\nYou have selected the game mode: $gameMode")
     println(s"Good Luck!")

@@ -1,6 +1,8 @@
 package tictactoe
 
 class Board {
+  val board: Array[Array[String]] = build()
+
   def build(): Array[Array[String]] = {
     val arr = Array.ofDim[String](3, 3)
 
