@@ -8,13 +8,32 @@
 
 Scala - a compiler based and a multi-paradigm programming language which is compact, fast and efficient
 
-### How to install?
+### How to Install?
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+This is the way to compile project
+
+`$ scalac Main.scala Board.scala`
 
 ### How to Play?
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+a tic tac toe board will be print on screen and
+the system will ask the players to insert a valid
+position to place "X's" or "O's".
+if the position entered is valid, a new board will
+be printed with the selected field occupied by the "X" or the "O".
+This will continue until one of the players manages to
+draw 3 consecutive "X's" or "O's" in line, or diagonally
+which will consist on a win and the game will restart, or
+if all the positions of the board are occupied and there's
+no winner, the game will declare a tie (draw), and restart the game.
+
+### Gameplay
+
+<img align="Center" src="https://i.ibb.co/YBSLGkj/p1.jpg" width="75%"/>
+<img align="Center" src="https://i.ibb.co/R2H0yzS/p2.jpg" width="75%"/>
+<img align="Center" src="https://i.ibb.co/NSNkk9z/p3.jpg" width="75%"/>
+
+
 
 ## Authors
 
