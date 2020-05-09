@@ -16,7 +16,7 @@ This is the way to compile project
 
 ### How to Play?
 
-a tic tac toe board will be print on screen and
+A tic tac toe board will be print on screen and
 the system will ask the players to insert a valid
 position to place "X's" or "O's".
 if the position entered is valid, a new board will
