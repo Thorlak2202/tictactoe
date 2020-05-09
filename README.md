@@ -8,11 +8,15 @@
 
 Scala - a compiler based and a multi-paradigm programming language which is compact, fast and efficient
 
-### How to Install?
+### How to Install and run it?
 
 This is the way to compile project
 
-`$ scalac Main.scala Board.scala`
+`$ scalac Main.scala Board.scala -d TTT.jar `
+
+And then execute it
+
+`$ scala TTT.jar   
 
 ### How to Play?
 
