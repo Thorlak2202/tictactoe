@@ -40,7 +40,7 @@ class Board {
 
     // Horizontal
     for (i <- 0 to 2) {
-      if (arr(i)(0) == arr(i)(1) || arr(i)(0) == arr(i)(2)) {
+      if (arr(i)(0) == arr(i)(1) && arr(i)(0) == arr(i)(2)) {
         getWinner = true
       }
     }
