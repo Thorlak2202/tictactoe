@@ -30,5 +30,7 @@ class Board {
       if (i < 2)
         println("\n---+---+---")
     }
+
+    println("\n")
   }
 }
