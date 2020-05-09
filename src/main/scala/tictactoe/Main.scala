@@ -1,43 +1,82 @@
 package tictactoe
 import scala.io.StdIn.{readLine, readInt}
+import util.control.Breaks._
 
 object Main {
   def main(args: Array[String]): Unit = {
-    var gameMode: Int = 0
     var gameOn: Boolean = true
 
     while (gameOn) {
-      gameMode = chooseGameMode()
+      welcome()
 
-      if (gameMode == 1 || gameMode == 2) {
-        println(s"\n\nYou have selected the game mode: $gameMode")
-        println(s"Good Luck!")
+      var board: Board = new Board()
+      var boardData: Array[Array[String]] = board.board
+      var turn: Int = 0
+      var getWinner: Boolean = false
 
-        val board: Board = new Board()
-        var boardData: Array[Array[String]] = board.board
+      board.draw(boardData)
+
+      while (gameOn) {
+        var restarted: Boolean = false
+        boardData = nextMove(boardData, turn)
         board.draw(boardData)
+        getWinner = board.winner(boardData)
 
-        var turn: Int = 0
-
-        while (gameOn) {
-          boardData = nextMove(boardData, turn)
-          board.draw(boardData)
-          turn += 1
+        if (getWinner) {
+          if (chooseRestartGame()) {
+            turn = 0
+            restarted = true
+            board = new Board()
+            boardData = board.board
+          } else {
+            gameOn = false
+          }
         }
-      } else {
-        println(s"You have selected an invalid game mode, try again!\n\n")
+
+        if (!getWinner && turn == 8) {
+          board.tie()
+
+          if (chooseRestartGame()) {
+            turn = 0
+            restarted = true
+            board = new Board()
+            boardData = board.board
+          } else {
+            gameOn = false
+          }
+        }
+
+        if (!restarted)
+          turn += 1
       }
     }
   }
 
-  def chooseGameMode() : Int = {
-    var gameMode: Int = 0
+  def welcome() : Unit = {
+    println(" █░█░█ █▀▀ █░░ █▀▀ █▀█ █▀▄▀█ █▀▀   ▀█▀ █▀█")
+    println(" ▀▄▀▄▀ ██▄ █▄▄ █▄▄ █▄█ █░▀░█ ██▄   ░█░ █▄█ ")
+    println("\n")
+    println("█▀▄▀█ █░█ █░░ ▀█▀ █ █▀█ █░░ ▄▀█ █▄█ █▀▀ █▀█")
+    println("█░▀░█ █▄█ █▄▄ ░█░ █ █▀▀ █▄▄ █▀█ ░█░ ██▄ █▀▄")
+    println("\n")
+    println( "▀█▀ █ █▀▀   ▀█▀ ▄▀█ █▀▀   ▀█▀ █▀█ █▀▀")
+    println( "░█░ █ █▄▄   ░█░ █▀█ █▄▄   ░█░ █▄█ ██▄")
+    println("\n\n")
+  }
 
-    println(s"Choose the game mode:")
-    println(s"1. Single player")
-    println(s"2. Multiplayer")
-    gameMode = readInt()
-    gameMode
+  def chooseRestartGame(): Boolean = {
+    var restart = true
+
+    println("==============================")
+    println("        Do you want to        ")
+    println("       play again? (Y/N)      ")
+    println("===============================")
+
+    if (readLine() == "N" || readLine() == "n") {
+      restart = false
+    }
+
+    restart
   }
 
   def nextMove(board: Array[Array[String]], turn: Int): Array[Array[String]] = {
@@ -49,22 +88,37 @@ object Main {
   }
 
   def pickMove(board: Array[Array[String]], player_id: Int): Array[Array[String]] = {
-    println(s"Player $player_id, it's your turn.")
-    println(s"Select your field number:")
+    breakable {
+      while (true) {
+        println(s"Player $player_id, it's your turn.")
+        println(s"Select your field number:")
 
-    val field = readInt().toString
-    val coords = for { row <- 0 to 2
-                       col <- 0 to 2
-                       if board(row)(col) == field
-                     } yield(row, col)
+        val field = readInt()
 
-    val x = coords.headOption.getOrElse(-1, -1)._1
-    val y = coords.headOption.getOrElse(-1, -1)._2
+        if (field >= 1 && field <= 9) {
+          val coords = for {row <- 0 to 2
+                            col <- 0 to 2
+                            if board(row)(col) == field.toString
+                            } yield (row, col)
 
-    if (player_id == 1) {
-      board(x)(y) = "X"
-    } else {
-      board(x)(y) = "O"
+          val x = coords.headOption.getOrElse(-1, -1)._1
+          val y = coords.headOption.getOrElse(-1, -1)._2
+
+          if (coords != Vector() && (board(x)(y) != "X" || board(x)(y) != "O")) {
+            if (player_id == 1) {
+              board(x)(y) = "X"
+            } else {
+              board(x)(y) = "O"
+            }
+
+            break
+          } else {
+            println("Invalid field, select another field")
+          }
+        } else {
+          println("This field doesn't exist in the board, select another field")
+        }
+      }
     }
 
     board

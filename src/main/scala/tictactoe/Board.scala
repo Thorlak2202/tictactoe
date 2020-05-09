@@ -36,7 +36,6 @@ class Board {
 
   def winner(arr: Array[Array[String]]): Boolean = {
     var getWinner: Boolean = false
-    var j:Int  = 0
 
     // Horizontal
     for (i <- 0 to 2) {
@@ -44,31 +43,37 @@ class Board {
         getWinner = true
       }
     }
+
     // Verticals
     for (i <- 0 to 2) {
       if (arr(0)(i) == arr(1)(i) && arr(0)(i) == arr(2)(i)) {
         getWinner = true
       }
     }
+
     // Diagonals
-    if (arr(2)(2) == arr(1)(1) && arr(2)(2) == arr(0)(0)) {
+    if (arr(0)(2) == arr(1)(1) && arr(0)(2) == arr(2)(0)) {
       getWinner = true
     }
+
     if (arr(0)(0) == arr(1)(1) && arr(0)(0) == arr(2)(2)) {
       getWinner = true
     }
 
-
-    if (getWinner == true){
+    if (getWinner){
       println("==============================")
-      println("|     WE HAVE A WINNER       |")
-      println("|      ᕦ( ͡° ͜ʖ ͡°)ᕤ          |")
+      println("      WE HAVE A WINNER!        ")
+      println("        ᕦ( ͡° ͜ʖ ͡°)ᕤ         ")
       println("==============================")
-      println("|       Type restart          |")
-      println("|       to play again!        |")
-      println("===============================")
     }
-  getWinner
+
+    getWinner
   }
 
+  def tie(): Unit = {
+    println("==============================")
+    println(" IT'S A SHAME, WE HAVE A TIE ")
+    println("         ┏༼ ◉ ╭╮ ◉༽┓         ")
+    println("==============================")
+  }
 }
