@@ -18,7 +18,7 @@ class Board {
     arr
   }
 
-  def draw(arr:Array[Array[String]]): Unit = {
+  def draw(arr: Array[Array[String]]): Unit = {
     for (i <- arr.indices) {
       print(" ")
       print(arr(i)(0))
@@ -33,4 +33,42 @@ class Board {
 
     println("\n")
   }
+
+  def winner(arr: Array[Array[String]]): Boolean = {
+    var getWinner: Boolean = false
+    var j:Int  = 0
+
+    // Horizontal
+    for (i <- 0 to 2) {
+      if (arr(i)(0) == arr(i)(1) || arr(i)(0) == arr(i)(2)) {
+        getWinner = true
+      }
+    }
+    // Verticals
+    for (i <- 0 to 2) {
+      if (arr(0)(i) == arr(1)(i) && arr(0)(i) == arr(2)(i)) {
+        getWinner = true
+      }
+    }
+    // Diagonals
+    if (arr(2)(2) == arr(1)(1) && arr(2)(2) == arr(0)(0)) {
+      getWinner = true
+    }
+    if (arr(0)(0) == arr(1)(1) && arr(0)(0) == arr(2)(2)) {
+      getWinner = true
+    }
+
+
+    if (getWinner == true){
+      println("==============================")
+      println("|     WE HAVE A WINNER       |")
+      println("|      ᕦ( ͡° ͜ʖ ͡°)ᕤ          |")
+      println("==============================")
+      println("|       Type restart          |")
+      println("|       to play again!        |")
+      println("===============================")
+    }
+  getWinner
+  }
+
 }
