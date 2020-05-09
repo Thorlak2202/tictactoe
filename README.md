@@ -16,7 +16,7 @@ This is the way to compile project
 
 And then execute it
 
-`$ scala TTT.jar   
+`$ scala TTT.jar   `
 
 ### How to Play?
 
